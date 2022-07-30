@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+ 
+<style>
+</style>
+</head>
+<body>
+    <div class="fundo">
+        <h1> Formulário </h1>
+        <div class="Campos">
+            <h1>Prencha os campos abaixo no formulário</h1>
+            <form action="/resultado.html" method="post" id="formcad">
+                Nome: <input type="text" name="nome" onblur="capitalize()" id="nome"><br>
+                Sobrenome: <input type="text" name="sobrenome" onblur="capitalize()" id="sobrenome"><br>
+                Telefone: <input type="text" name="telefone" id="telefone" placeholder="Digite Seu telefone" maxlength="15"><br>
+                Email: <input id="mail" type="email" name="email"><br>
+                idade: <input type="number" name="idade" max="50"><br>
+                <button type="submit" >Enviar</button>
+            </form>
+     </div>
+    </div>
+
+    <script>
+
+        function validaremail() {
+            var email = document.getElementById("mail").value;
+            var regx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            if (regx.test(email)) {
+
+                return true
+
+            }
+            else {
+                alert("voce digitou um email invalido")
+                return false
+            }
+
+        }
+        //Mascara do telefone//
+        function mascara(o, f) {
+            v_obj = o
+            v_fun = f
+            setTimeout("execmascara()", 1)
+        }
+        function execmascara() {
+            v_obj.value = v_fun(v_obj.value)
+        }
+        function mtel(v) {
+            v = v.replace(/\D/g, "");
+            v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+            v = v.replace(/(\d)(\d{4})$/, "$1-$2");
+            return v;
+        }
+        function id(el) {
+            return document.getElementById(el);
+        }
+        window.onload = function () {
+            id('telefone').onkeyup = function () {
+                mascara(this, mtel);
+            }
+        }
+//Função para Inserir Nome e Sobre nome Maisculos
+        String.prototype.capitalize = function () {
+        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+}
+
+console
+var nome1=document.getElementById("nome").value;
+
+   
+    </script>
+</body>
+
+</html>
