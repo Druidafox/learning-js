@@ -30,3 +30,14 @@ function capitalize(filedObject) {
     var newValueCapitalized = filedObject.value.charAt(0).toUpperCase() + filedObject.value.slice(1).toLowerCase();
     filedObject.value = newValueCapitalized;
 }
+
+$.ajax({
+    url: "/users",
+    method: "POST",
+    data: {
+        zipcode: 97201
+    },
+    success: function (result) {
+        console.log(result);
+    }
+});
