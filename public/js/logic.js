@@ -12,14 +12,6 @@ function isValidEmail() {
     return false;
 }
 
-function mask(phoneFieldInput, callbackMask) {
-    var phone = phoneFieldInput;
-    var callback = callbackMask;
-    setTimeout(function () {
-        phone.value = callback(phone.value)
-    }, 1)
-}
-
 function applyPhoneMask(phoneFieldValue) {
     phoneFieldValue = phoneFieldValue.replace(/\D/g, "");
     phoneFieldValue = phoneFieldValue.replace(/^(\d{2})(\d)/g, "($1) $2");
@@ -28,14 +20,13 @@ function applyPhoneMask(phoneFieldValue) {
 }
 
 window.onload = function () {
-    var id = document.getElementById('telefone');
-    id.onkeyup = function () {
-        mask(this, applyPhoneMask);
+    var phoneFiledObject = document.getElementById('telefone');
+    phoneFiledObject.onkeyup = function () {
+        this.value = applyPhoneMask(this.value)
     }
 }
 
-String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+function capitalize(filedObject) {
+    var newValueCapitalized = filedObject.value.charAt(0).toUpperCase() + filedObject.value.slice(1).toLowerCase();
+    filedObject.value = newValueCapitalized;
 }
-
-var nome1 = document.getElementById("nome").value;
