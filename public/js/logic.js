@@ -31,13 +31,24 @@ function capitalize(filedObject) {
     filedObject.value = newValueCapitalized;
 }
 
-$.ajax({
-    url: "/users",
-    method: "POST",
-    data: {
-        zipcode: 97201
-    },
-    success: function (result) {
-        console.log(result);
-    }
-});
+function send() {
+    $.ajax({
+        url: "/users",
+        type: "POST",
+        data: {
+            name: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            age: ""
+        },
+        success: function (result) {
+            console.log(result);
+            $('p').append(result.result);
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+            console.error(errorMessage);
+        }
+    });
+}
+
