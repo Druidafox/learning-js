@@ -31,8 +31,6 @@ function capitalize(filedObject) {
     filedObject.value = newValueCapitalized;
 }
 
-//TODO completar o body com os dados que estão vindo do formulário
-//TODO não permitir que sejam enviada uma requisição quando algum campo estiver em branco
 function send() {
     $.ajax({
         url: "/users",

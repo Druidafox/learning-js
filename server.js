@@ -1,24 +1,31 @@
-const app = require('express')()
+const app = require('express')();
 const express = require('express');
-const path = require('path')
+const path = require('path');
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+const database = [];
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/formulario.html'))
-})
+  res.sendFile(path.join(__dirname + '/formulario.html'));
+});
 
 app.post('/users', (req, res) => {
-  console.log(req.body);
+  console.log("adding...");
   res.status(200).json({ result: "ok" });
-})
+});
+
+app.get('/users', (req, res) => {
+  console.log("listing...");
+  res.status(200).json(database);
+});
 
 app.use(express.static('public'));
 
 app.post('/resultado', (req, res) => {
-  res.sendFile(path.join(__dirname + '/resultado.html'))
+  res.sendFile(path.join(__dirname + '/resultado.html'));
 })
 
-app.listen(8001)
-console.log('Servidor rodando na porta 8001!')
+app.listen(8001);
+console.log('Servidor rodando na porta 8001!');
