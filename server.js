@@ -23,9 +23,5 @@ app.get('/users', (req, res) => {
 
 app.use(express.static('public'));
 
-app.post('/resultado', (req, res) => {
-  res.sendFile(path.join(__dirname + '/resultado.html'));
-})
-
 app.listen(8001);
 console.log('Servidor rodando na porta 8001!');
