@@ -44,7 +44,7 @@ function send() {
         },
         success: function (result) {
             console.log(result);
-            $('p').append(result.result);
+            $('p').append(JSON.stringify(result) + "<br/>");
         },
         error: function (jqXhr, textStatus, errorMessage) {
             console.error(errorMessage);
