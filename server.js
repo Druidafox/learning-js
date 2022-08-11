@@ -1,4 +1,5 @@
 const app = require('express')();
+const { json } = require('express');
 const express = require('express');
 const path = require('path');
 
@@ -13,12 +14,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-  console.log("adding...");
+  console.log("adding user: " + JSON.stringify(req.body));
   res.status(200).json({ result: "ok" });
 });
 
 app.get('/users', (req, res) => {
-  console.log("listing...");
+  console.log("listing " + database.length + " users");
   res.status(200).json({ users: database });
 });
 
