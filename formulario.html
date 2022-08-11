@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/logic.js"></script>
@@ -13,21 +14,22 @@
 
 <body>
     <div class="fundo">
-        <h1> Formulário </h1>
-        <div class="Campos">
+        <div class="w3-container w3-blue">
             <h1>Prencha os campos abaixo no formulário</h1>
+        </div>
+        <div class="Campos">
             <form action="/users" method="post" id="formcad">
-                Nome: <input type="text" name="nome" onblur="capitalize(this)" id="nome"><br>
-                Sobrenome: <input type="text" name="sobrenome" onblur="capitalize(this)" id="sobrenome"><br>
-                Telefone: <input type="text" name="telefone" id="telefone" placeholder="Digite Seu telefone"
-                    maxlength="15"><br>
-                Email: <input id="mail" type="email" name="email"><br>
-                idade: <input type="number" name="idade" max="50"><br>
-                <button type="submit">Enviar</button>
+                Nome: <input type="text" class="w3-input" name="nome" onblur="capitalize(this)" id="nome"><br>
+                Sobrenome: <input type="text" class="w3-input" name="sobrenome" onblur="capitalize(this)"
+                    id="sobrenome"><br>
+                Telefone: <input type="text" class="w3-input" name="telefone" id="telefone"
+                    placeholder="Digite Seu telefone" maxlength="15"><br>
+                Email: <input id="mail" class="w3-input" type="email" name="email"><br>
+                idade: <input type="number" class="w3-input" name="idade" max="50"><br>
+                <input class="w3-btn w3-black" onclick="send()" value="Enviar" type="button"></input>
             </form>
         </div>
     </div>
-    <button onclick="send()">Send...</button>
     <p></p>
 </body>
 
