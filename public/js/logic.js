@@ -33,6 +33,7 @@ function capitalize(filedObject) {
 
 /**
  * TODO fazer a validação dos outros campos
+ * TODO fazer a rotina de limpar as mesagens de errors
  * @returns a object with data of form and verifies if exists errors
  */
 function createFormData() {
@@ -52,6 +53,11 @@ function createFormData() {
     return formData;
 }
 
+/**
+ * TODO criar um objeto para concentrar as funções de users
+ * TODO tonar as chamadas agnósticas
+ * @returns 
+ */
 function send() {
 
     var data = createFormData();
