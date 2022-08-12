@@ -3,7 +3,7 @@
  * @returns boolean
  */
 function isValidEmail() {
-    var email = document.getElementById("mail").value;
+    var email = document.getElementById("email").value;
     var regx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (regx.test(email)) {
         return true;
@@ -19,8 +19,9 @@ function applyPhoneMask(phoneFieldValue) {
     return phoneFieldValue;
 }
 
+
 window.onload = function () {
-    var phoneFiledObject = document.getElementById('telefone');
+    var phoneFiledObject = document.getElementById('phone');
     phoneFiledObject.onkeyup = function () {
         this.value = applyPhoneMask(this.value)
     }
@@ -56,7 +57,7 @@ function createFormData() {
 /**
  * TODO criar um objeto para concentrar as funções de users
  * TODO tonar as chamadas agnósticas
- * @returns 
+ * @returns
  */
 function send() {
 
