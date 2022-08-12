@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 /**
- * criar um id randomico para cada novo usuário
+ * criar um id randômico para cada novo usuário
  */
 const database = [];
 
