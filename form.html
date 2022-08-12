@@ -22,14 +22,17 @@ Os nomes usados em class e id não podem começar com letra maiúscula-->
         </div>
         <div class="Campos">
             <form action="/users" method="post" id="formcad">
-                Nome: <input type="text" class="w3-input" name="nome" onblur="capitalize(this)" id="nome"
-                    placeholder="seu nome...">
-                Sobrenome: <input type="text" class="w3-input" name="sobrenome" onblur="capitalize(this)" id="sobrenome"
-                    placeholder="seu sobrenome...">
-                Telefone: <input type="text" class="w3-input" name="telefone" id="telefone"
+                <span id="nameMessage" style="color: red;"></span><br />
+                <label for="name">Nome:</label> <input type="text" class="w3-input" name="name"
+                    onblur="capitalize(this)" id="name" placeholder="seu nome...">
+                <label for="lastName">Sobrenome:</label> <input type="text" class="w3-input" name="lastName"
+                    onblur="capitalize(this)" id="lastName" placeholder="seu sobrenome...">
+                <label for="phone">Telefone:</label> <input type="text" class="w3-input" name="telefone" id="phone"
                     placeholder="seu telefone..." maxlength="15">
-                Email: <input id="mail" class="w3-input" type="email" name="email" placeholder="seu email...">
-                idade: <input type="number" placeholder="sua idade..." class="w3-input" name="idade" max="50">
+                <label for="email">Email:</label> <input id="email" class="w3-input" type="email" name="email"
+                    placeholder="seu email...">
+                <label for="age">idade:</label> <input type="number" placeholder="sua idade..." class="w3-input"
+                    name="age" id="age" max="50">
                 <input class="w3-btn w3-black" onclick="send()" value="Enviar" type="button"></input>
             </form>
         </div>

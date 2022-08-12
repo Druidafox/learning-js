@@ -31,17 +31,39 @@ function capitalize(filedObject) {
     filedObject.value = newValueCapitalized;
 }
 
+/**
+ * TODO fazer a validação dos outros campos
+ * @returns a object with data of form and verifies if exists errors
+ */
+function createFormData() {
+    var error = false;
+    var name = $("#name").val();
+    if (name === "") {
+        error = true;
+        $("#nameMessage").text("Nome não pode ser vazio");
+    }
+    var lastName = $("#lastName").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+    var age = $("#age").val();
+
+    var formData = { name, lastName, phone, email, age, error }
+
+    return formData;
+}
+
 function send() {
+
+    var data = createFormData();
+
+    if (data.error) {
+        return;
+    }
+
     $.ajax({
         url: "/users",
         type: "POST",
-        data: {
-            name: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            age: ""
-        },
+        data: data,
         success: function (result) {
             console.log(result);
             $('p').append(JSON.stringify(result) + "<br/>");
