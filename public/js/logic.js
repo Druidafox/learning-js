@@ -19,7 +19,6 @@ function applyPhoneMask(phoneFieldValue) {
     return phoneFieldValue;
 }
 
-
 window.onload = function () {
     var phoneFiledObject = document.getElementById('phone');
     phoneFiledObject.onkeyup = function () {

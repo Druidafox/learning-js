@@ -1,8 +1,10 @@
 const app = require('express')();
-const { json } = require('express');
 const express = require('express');
 const path = require('path');
 
+/**
+ * criar um id randomico para cada novo usuário
+ */
 const database = [];
 
 app.use(express.json());
