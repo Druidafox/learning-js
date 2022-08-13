@@ -19,11 +19,36 @@ function applyPhoneMask(phoneFieldValue) {
     return phoneFieldValue;
 }
 
+function list() {
+    $('#usersTable tbody').empty();
+    const api = new BackendAPI();
+    api.users.getAll(buildTableLines());
+}
+
 window.onload = function () {
+    list();
     var phoneFiledObject = document.getElementById('phone');
     phoneFiledObject.onkeyup = function () {
         this.value = applyPhoneMask(this.value)
     }
+    $("#submitUserBtn").click(function () {
+        createUser();
+    });
+}
+
+function buildTableLines() {
+    return (users) => {
+        var table = $("#usersTable").find('tbody');
+        $.each(users, (index, user) => {
+            table.append($('<tr>')
+                .append($('<td>').text(user.name))
+                .append($('<td>').text(user.lastName))
+                .append($('<td>').text(user.phone))
+                .append($('<td>').text(user.email))
+                .append($('<td>').text(user.age))
+            );
+        });
+    };
 }
 
 function capitalize(filedObject) {
@@ -31,52 +56,74 @@ function capitalize(filedObject) {
     filedObject.value = newValueCapitalized;
 }
 
-/**
- * TODO fazer a validação dos outros campos
- * TODO fazer a rotina de limpar as mesagens de errors
- * @returns a object with data of form and verifies if exists errors
- */
-function createFormData() {
-    var error = false;
-    var name = $("#name").val();
-    if (name === "") {
-        error = true;
-        $("#nameMessage").text("Nome não pode ser vazio");
-    }
-    var lastName = $("#lastName").val();
-    var phone = $("#phone").val();
-    var email = $("#email").val();
-    var age = $("#age").val();
-
-    var formData = { name, lastName, phone, email, age, error }
-
-    return formData;
+function serializeForm(form) {
+    var hasError = false;
+    var data = form.serializeArray();
+    var fieldErros = [];
+    $.each(data, function (index, field) {
+        field.value = $.trim(field.value);
+        if (!field.value) {
+            hasError = true;
+            fieldErros.push(field.name);
+        }
+    });
+    return { hasError, data, fieldErros };
 }
 
-/**
- * TODO criar um objeto para concentrar as funções de users
- * TODO tonar as chamadas agnósticas
- * @returns
- */
-function send() {
+function showErrorMensages(fieldErros) {
+    $.each(fieldErros, function (index, field) {
+        var span = $('span[name=' + field + 'ErrorMessage' + ']');
+        span.text(" (este campo não pode ser vazio)");
+    })
+}
 
-    var data = createFormData();
+function clearErrorMensages() {
+    $('.errorMessage', "#formcad").each(function () {
+        $(this).text("");
+    })
+}
 
-    if (data.error) {
+function createUser() {
+    const api = new BackendAPI();
+
+    clearErrorMensages();
+
+    var form = serializeForm($("#formcad"));
+
+    if (form.hasError) {
+        showErrorMensages(form.fieldErros);
         return;
     }
 
-    $.ajax({
-        url: "/users",
-        type: "POST",
-        data: data,
-        success: function (result) {
-            console.log(result);
-            $('p').append(JSON.stringify(result) + "<br/>");
-        },
-        error: function (jqXhr, textStatus, errorMessage) {
-            console.error(errorMessage);
-        }
-    });
+    api.users.create(form.data)
+    list();
 }
 
+function BackendAPI() {
+    this.users = {
+        create: function (userPayload) {
+            $.ajax({
+                url: "/users",
+                type: "POST",
+                data: userPayload,
+                success: function (result) {
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    console.error(errorMessage);
+                }
+            });
+        },
+        getAll: function (callbackFunction) {
+            $.ajax({
+                url: "/users",
+                type: "GET",
+                success: function (result) {
+                    callbackFunction(result.users);
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    console.error(errorMessage);
+                }
+            });
+        }
+    }
+}

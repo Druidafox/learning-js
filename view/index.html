@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/logic.js"></script>
+    <style>
+    </style>
+</head>
+
+<!-- TODO usar label nos textos soltos. Em HTML não pode ter textos soltos
+Os nomes usados em class e id não podem começar com letra maiúscula-->
+
+<body>
+    <div class="fundo">
+        <div class="w3-container w3-blue">
+            <h1>Bem-vindo ao CRUD usando Javascript</h1>
+        </div>
+        <div class="Campos">
+            <form action="/users" method="post" id="formcad" onsubmit="event.preventDefault()">
+                <label for="name">Nome:<span name="nameErrorMessage" class="errorMessage"
+                        style="color: red;"></span></label> <input type="text" class="w3-input" name="name"
+                    onblur="capitalize(this)" id="name" placeholder="seu nome...">
+                <label for="lastName">Sobrenome: <span class="errorMessage" name="lastNameErrorMessage"
+                        style="color: red;"></span></label> <input type="text" class="w3-input" name="lastName"
+                    onblur="capitalize(this)" id="lastName" placeholder="seu sobrenome...">
+                <label for="phone">Telefone:<span class="errorMessage" name="phoneErrorMessage"
+                        style="color: red;"></span></label> <input type="text" class="w3-input field" name="phone"
+                    id="phone" placeholder="seu telefone..." maxlength="15">
+                <label for="email">Email:<span class="errorMessage" name="emailErrorMessage"
+                        style="color: red;"></span></label> <input id="email" class="w3-input field" type="email"
+                    name="email" placeholder="seu email...">
+                <label for="age">idade:<span class="errorMessage" name="ageErrorMessage"
+                        style="color: red;"></span></label> <input type="number" placeholder="sua idade..."
+                    class="w3-input field" name="age" id="age" max="50">
+                <br /><br />
+
+                <button id="submitUserBtn" class="w3-button w3-round w3-blue" onclick="create()">Create</button>
+                <button class="w3-button w3-round w3-blue" onclick="update()">Update</button>
+                <button class="w3-button w3-round w3-blue" onclick="deleteItem()">Delete</button>
+                <br /><br />
+            </form>
+        </div>
+        <div class="table">
+            <table id="usersTable" class="w3-table-all w3-hoverable">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>last name</th>
+                        <th>phone</th>
+                        <th>email</th>
+                        <th>age</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -12,11 +12,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/form.html'));
+  res.sendFile(path.join(__dirname + '/view/index.html'));
 });
+
 
 app.post('/users', (req, res) => {
   console.log("adding user: " + JSON.stringify(req.body));
+  database.push(req.body);
   res.status(200).json({ result: "ok" });
 });
 
