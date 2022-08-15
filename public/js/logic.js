@@ -41,12 +41,21 @@ function buildTableLines() {
         var table = $("#usersTable").find('tbody');
         $.each(users, (index, user) => {
             table.append($('<tr>')
-                .append($('<td>').text(user.name))
-                .append($('<td>').text(user.lastName))
-                .append($('<td>').text(user.phone))
-                .append($('<td>').text(user.email))
-                .append($('<td>').text(user.age))
+                .append($('<td>').text(user.name).addClass(() => "cell-name"))
+                .append($('<td>').text(user.lastName).addClass(() => "cell-lastName"))
+                .append($('<td>').text(user.phone).addClass(() => "cell-phone"))
+                .append($('<td>').text(user.email).addClass(() => "cell-email"))
+                .append($('<td>').text(user.age).addClass(() => "cell-age"))
             );
+        });
+        $('#usersTable tbody tr').click(function () {
+            var $row = $(this).closest("tr");
+
+            $("#name").val($row.find(".cell-name").text());
+            $("#lastName").val($row.find(".cell-lastName").text());
+            $("#phone").val($row.find(".cell-phone").text());
+            $("#email").val($row.find(".cell-email").text());
+            $("#age").val($row.find(".cell-age").text());
         });
     };
 }
@@ -83,6 +92,7 @@ function clearErrorMensages() {
     })
 }
 
+
 function createUser() {
     const api = new BackendAPI();
 
@@ -99,31 +109,33 @@ function createUser() {
     list();
 }
 
-function BackendAPI() {
-    this.users = {
-        create: function (userPayload) {
-            $.ajax({
-                url: "/users",
-                type: "POST",
-                data: userPayload,
-                success: function (result) {
-                },
-                error: function (jqXhr, textStatus, errorMessage) {
-                    console.error(errorMessage);
-                }
-            });
-        },
-        getAll: function (callbackFunction) {
-            $.ajax({
-                url: "/users",
-                type: "GET",
-                success: function (result) {
-                    callbackFunction(result.users);
-                },
-                error: function (jqXhr, textStatus, errorMessage) {
-                    console.error(errorMessage);
-                }
-            });
-        }
+class BackendAPI {
+    constructor() {
+        this.users = {
+            create: function (userPayload) {
+                $.ajax({
+                    url: "/users",
+                    type: "POST",
+                    data: userPayload,
+                    success: function (result) {
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        console.error(errorMessage);
+                    }
+                });
+            },
+            getAll: function (callbackFunction) {
+                $.ajax({
+                    url: "/users",
+                    type: "GET",
+                    success: function (result) {
+                        callbackFunction(result.users);
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        console.error(errorMessage);
+                    }
+                });
+            }
+        };
     }
 }
