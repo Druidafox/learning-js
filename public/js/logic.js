@@ -55,13 +55,16 @@ function capitalize(filedObject) {
     filedObject.value = newValueCapitalized;
 }
 
-function serializeForm(form) {
+function serializeForm(form, isCreate) {
     var hasError = false;
     var data = form.serializeArray();
     var fieldErros = [];
     $.each(data, function (index, field) {
+        var isNotId = field.name !== "id";
+        var isNotNewUser = !isCreate;
+        var isEmpty = !field.value
         field.value = $.trim(field.value);
-        if (!field.value) {
+        if (isEmpty && (isNotId && isNotNewUser)) {
             hasError = true;
             fieldErros.push(field.name);
         }
@@ -90,6 +93,7 @@ function createUser() {
     var form = serializeForm($("#formcad"));
 
     if (form.hasError) {
+        console.error(form.fieldErros)
         showErrorMensages(form.fieldErros);
         return;
     }
@@ -113,6 +117,12 @@ function updateUser() {
 
     console.log(form.data)
     api.users.update($("#id").val(), form.data)
+    list();
+}
+
+function deleteUser() {
+    const api = new BackendAPI();
+    api.users.delete($("#id").val())
     list();
 }
 
@@ -154,6 +164,17 @@ class BackendAPI {
                         console.error(errorMessage);
                     }
                 });
+            },
+            delete: function (id) {
+                $.ajax({
+                    url: "/users/" + id,
+                    type: "DELETE",
+                    success: (result) => {
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        console.error(errorMessage);
+                    }
+                });
             }
         };
     }
@@ -170,5 +191,8 @@ $(document).ready(() => {
     });
     $("#updateUserBtn").click(function () {
         updateUser();
+    });
+    $("#deleteUserBtn").click(function () {
+        deleteUser();
     });
 });

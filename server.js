@@ -23,9 +23,23 @@ app.post('/users', (req, res) => {
 
 app.put('/users/:id', (req, res) => {
   console.log("updating user: " + JSON.stringify(req.body));
-  console.log(req.params)
-  var match = database.map((item, index) => { if (item.id === req.params.id) return index }).filter(item => item);
-  console.log(match)
+  for (var i in database) {
+    if (database[i].id === req.params.id) {
+      database[i] = { ...req.body };
+      break;
+    }
+  }
+  res.status(200).json({ result: "ok" });
+});
+
+app.delete('/users/:id', (req, res) => {
+  console.log("deleting user: " + req.params.id);
+  for (var i in database) {
+    if (database[i].id === req.params.id) {
+      database.splice(i, 1);
+      break;
+    }
+  }
   res.status(200).json({ result: "ok" });
 });
 
