@@ -22,6 +22,7 @@ Os nomes usados em class e id não podem começar com letra maiúscula-->
         </div>
         <div class="Campos">
             <form action="/users" method="post" id="formcad" onsubmit="event.preventDefault()">
+                <input type="hidden" id="id" name="id">
                 <label for="name">Nome:<span name="nameErrorMessage" class="errorMessage"
                         style="color: red;"></span></label> <input type="text" class="w3-input" name="name"
                     onblur="capitalize(this)" id="name" placeholder="seu nome...">
@@ -40,7 +41,7 @@ Os nomes usados em class e id não podem começar com letra maiúscula-->
                 <br /><br />
 
                 <button id="submitUserBtn" class="w3-button w3-round w3-blue">Create</button>
-                <button class="w3-button w3-round w3-blue">Update</button>
+                <button id="updateUserBtn" class="w3-button w3-round w3-blue">Update</button>
                 <button class="w3-button w3-round w3-blue">Delete</button>
                 <br /><br />
             </form>
@@ -49,6 +50,7 @@ Os nomes usados em class e id não podem começar com letra maiúscula-->
             <table id="usersTable" class="w3-table-all w3-hoverable">
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>name</th>
                         <th>last name</th>
                         <th>phone</th>

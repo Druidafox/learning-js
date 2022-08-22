@@ -25,22 +25,12 @@ function list() {
     api.users.getAll(buildTableLines());
 }
 
-window.onload = function () {
-    list();
-    var phoneFiledObject = document.getElementById('phone');
-    phoneFiledObject.onkeyup = function () {
-        this.value = applyPhoneMask(this.value)
-    }
-    $("#submitUserBtn").click(function () {
-        createUser();
-    });
-}
-
 function buildTableLines() {
     return (users) => {
         var table = $("#usersTable").find('tbody');
         $.each(users, (index, user) => {
             table.append($('<tr>')
+                .append($('<td>').text(user.id).addClass(() => "cell-id"))
                 .append($('<td>').text(user.name).addClass(() => "cell-name"))
                 .append($('<td>').text(user.lastName).addClass(() => "cell-lastName"))
                 .append($('<td>').text(user.phone).addClass(() => "cell-phone"))
@@ -50,7 +40,7 @@ function buildTableLines() {
         });
         $('#usersTable tbody tr').click(function () {
             var $row = $(this).closest("tr");
-
+            $("#id").val($row.find(".cell-id").text());
             $("#name").val($row.find(".cell-name").text());
             $("#lastName").val($row.find(".cell-lastName").text());
             $("#phone").val($row.find(".cell-phone").text());
@@ -92,7 +82,6 @@ function clearErrorMensages() {
     })
 }
 
-
 function createUser() {
     const api = new BackendAPI();
 
@@ -106,6 +95,24 @@ function createUser() {
     }
 
     api.users.create(form.data)
+    list();
+}
+
+
+function updateUser() {
+    const api = new BackendAPI();
+
+    clearErrorMensages();
+
+    var form = serializeForm($("#formcad"));
+
+    if (form.hasError) {
+        showErrorMensages(form.fieldErros);
+        return;
+    }
+
+    console.log(form.data)
+    api.users.update($("#id").val(), form.data)
     list();
 }
 
@@ -135,7 +142,33 @@ class BackendAPI {
                         console.error(errorMessage);
                     }
                 });
+            },
+            update: function (id, userPayload) {
+                $.ajax({
+                    url: "/users/" + id,
+                    type: "PUT",
+                    data: userPayload,
+                    success: (result) => {
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+                        console.error(errorMessage);
+                    }
+                });
             }
         };
     }
 }
+
+$(document).ready(() => {
+    list();
+    var $phone = $("#phone");
+    $phone.keyup(() => {
+        $phone.val(applyPhoneMask($phone.val()));
+    })
+    $("#submitUserBtn").click(function () {
+        createUser();
+    });
+    $("#updateUserBtn").click(function () {
+        updateUser();
+    });
+});

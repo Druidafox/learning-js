@@ -2,7 +2,10 @@
     "name": "expert-js-stack",
     "version": "1.0.0",
     "description": "EXPERT JS Stack",
-    "main": "index.js",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/desenvolvedorexpert/js-stack"
@@ -11,5 +14,8 @@
         "express": "^4.18.1",
         "git": "^0.1.5",
         "mongoose": "latest"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.19"
     }
 }
