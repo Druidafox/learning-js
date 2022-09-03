@@ -5,10 +5,29 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title></title>
-    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/logic.js"></script>
+    <title>formulario</title>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="js/logic.js" defer></script>
     <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #04AA6D;
+            color: white;
+        }
     </style>
 </head>
 
@@ -22,22 +41,48 @@ Os nomes usados em class e id não podem começar com letra maiúscula-->
         </div>
         <div class="Campos">
             <form action="/users" method="post" id="formcad">
-                <span id="nameMessage" style="color: red;"></span><br />
+                <span name="nameErrorMessage" style="color: red;"></span><br />
                 <label for="name">Nome:</label> <input type="text" class="w3-input" name="name"
                     onblur="capitalize(this)" id="name" placeholder="seu nome...">
+                <span name="lastNameErrorMessage" style="color: red;"></span><br />
                 <label for="lastName">Sobrenome:</label> <input type="text" class="w3-input" name="lastName"
                     onblur="capitalize(this)" id="lastName" placeholder="seu sobrenome...">
-                <label for="phone">Telefone:</label> <input type="text" class="w3-input" name="telefone" id="phone"
+                <span name="phoneErrorMessage" style="color: red;"></span><br />
+                <label for="phone">Telefone:</label> <input type="text" class="w3-input" name="phone" id="phone"
                     placeholder="seu telefone..." maxlength="15">
+                <span name="emailErrorMessage" style="color: red;"></span><br />
                 <label for="email">Email:</label> <input id="email" class="w3-input" type="email" name="email"
                     placeholder="seu email...">
+                <span name="ageErrorMessage" style="color: red;"></span><br />
                 <label for="age">idade:</label> <input type="number" placeholder="sua idade..." class="w3-input"
                     name="age" id="age" max="50">
                 <input class="w3-btn w3-black" onclick="send()" value="Enviar" type="button"></input>
             </form>
         </div>
     </div>
-    <p></p>
+        
+        <table id="table" class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>idade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vitorhugo</td>
+                    <td>Batista</td>
+                    <td>999999999</td>
+                    <td>vitorhugosjrp@gmail.com</td>
+                    <td>29</td>
+                </tr>
+            </tbody>
+            </table>
+    
+        <p></p>
 </body>
 
 </html>
