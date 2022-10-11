@@ -1,0 +1,9 @@
+Como usar os imports como módulos ES?
+
+O que é uma promisse?
+
+Quando usar o await?
+
+O que é try?
+
+Quando usar os métodos GET, POST, PUT, DELETE, PATCH? Procurar por "HTTP methods: Idempotency and Safety" -> https://www.mscharhag.com/api-design/http-idempotent-safe
