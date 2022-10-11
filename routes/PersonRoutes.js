@@ -1,8 +1,8 @@
-const router = require('express').Router()
-const Person = require('../models/Person.js')
+import express from 'express';
+import Person from '../models/Person.js';
 
+const router = express.Router();
 
-//Rotas de recebimento das requisições
 router.post('/', async (req, res) => {
     const { name, lastname, age, email, phone } = req.body;
     const person = {
@@ -13,7 +13,6 @@ router.post('/', async (req, res) => {
         age,
     }
 
-
     try {
         await Person.create(person);
         res.status(201).json(person)
@@ -23,11 +22,8 @@ router.post('/', async (req, res) => {
     }
 })
 
-
 router.get('/:id', async (req, res) => {
-
     const id = req.params.id;
-
     try {
         const person = await Person.find({ _id: id })
         console.log("registro deletado com sucesso!")
@@ -35,27 +31,18 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
         return
-
     }
-
 })
 
-
 router.get('/', async (req, res) => {
-    var name = "vitorhugo";
-
     try {
-        const person = await Person.find()
+        const person = await Person.find();
         res.send(person);
-
     } catch (error) {
         res.status(500).json({ error: error });
         return
-
     }
-
 })
-
 
 router.delete('/delete/:id', async (req, res) => {
     const id = req.params;
@@ -63,11 +50,9 @@ router.delete('/delete/:id', async (req, res) => {
     try {
         const personid = await Person.deleteOne({ id })
         console.log(personid)
-
     } catch (error) {
         res.status(500).json({ error: error });
     }
-
 })
 
 router.put('/update/:id', async (req, res) => {
@@ -80,11 +65,8 @@ router.put('/update/:id', async (req, res) => {
         email,
         age,
     }
-
-
     try {
-
-        await Person.findByIdAndUpdate(id,person);
+        await Person.findByIdAndUpdate(id, person);
         res.status(201).json(person)
         console.log("registro atualizado com sucesso!");
     } catch (error) {
@@ -92,4 +74,4 @@ router.put('/update/:id', async (req, res) => {
     }
 })
 
-module.exports = router;
+export default router;
