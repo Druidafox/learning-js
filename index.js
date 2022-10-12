@@ -1,7 +1,7 @@
 import express, { json, urlencoded } from 'express';
 import { connect } from 'mongoose';
 import path from 'path';
-import personRoutes from './routes/PersonRoutes.js';
+import personRoutes from './src/routes/PersonRoutes.js';
 
 const app = express();
 app.use(express.static(path.dirname('/src')));
