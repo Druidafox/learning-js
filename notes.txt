@@ -1,9 +1,21 @@
 Como usar os imports como módulos ES?
 
-O que é uma promisse?
+O que é uma promise?
 
 Quando usar o await?
 
 O que é try?
 
 Quando usar os métodos GET, POST, PUT, DELETE, PATCH? Procurar por "HTTP methods: Idempotency and Safety" -> https://www.mscharhag.com/api-design/http-idempotent-safe
+
+Qual método http usar em um endpoint que deve receber duas urls de branchs git e realizar o merge dessas duas branchs?
+
+/merge
+
+body => 
+{
+    branch_one: "url",
+    branch_two: "url"
+}
+
+branch_one <- branch_two
